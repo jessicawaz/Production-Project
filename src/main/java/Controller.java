@@ -39,14 +39,14 @@ public class Controller {
         for (int count = 1; count <= 10; count++) {
             cmbItemType.getItems().add(String.valueOf(count));
         }
-//        setEditable(true);
-//        getSelectionModel().selectFirst();
+        cmbItemType.setEditable(true);
+        cmbItemType.getSelectionModel().selectFirst();
     }
 
     public void connectToDb() {
 
-        final String JDBC_DRIVER = "com.h2.Driver";
-        final String DB_URL = "jdbc:h2:./res/db";
+        final String JDBC_DRIVER = "org.h2.Driver";
+        final String DB_URL = "jdbc:h2:./resources/db";
 
         //  Database credentials
         final String USER = "";
@@ -64,11 +64,21 @@ public class Controller {
             //STEP 3: Execute a query
             stmt = conn.createStatement();
 
-            String sql = "INSERT INTO product (type, manufacturer, name) " +
-                    "VALUES ( 'AUDIO', 'Apple', 'iPod' )";
+            String nameTxt = txtProdName.getText();
+            String manuTxt = txtManufacturer.getText();
+            String typeCmb = cmbItemType.getValue();
 
-            stmt.executeUpdate(sql);
+//            String sql = "SELECT * FROM product";
+//
+//            ResultSet rs = stmt.executeQuery(sql);
 
+            System.out.println(nameTxt);
+            System.out.println(manuTxt);
+            System.out.println(typeCmb);
+//
+//            String inSql = "INSERT INTO product (type, manufacturer, name) " +
+//                    "VALUES ( 'AUDIO', 'Apple', 'iPod' )";
+//            stmt.executeUpdate(inSql);
 
             // STEP 4: Clean-up environment
             stmt.close();
@@ -79,6 +89,6 @@ public class Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+   }
 }
 
