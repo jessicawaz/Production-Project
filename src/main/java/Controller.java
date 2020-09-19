@@ -1,7 +1,10 @@
 /*
 * Author: Jessica Wazbinski
-*
+* Purpose: Controller for production project. Utilizes sql and database
+* for adding and updating products.
+* Date: 9/19/2020
 */
+
 import java.sql.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
