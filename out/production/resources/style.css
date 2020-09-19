@@ -1,0 +1,26 @@
+/*
+* Author: Jessica Wazbinski
+* Purpose: CSS for production project.
+* Date: 9/19/2020
+*/
+
+.root {
+    -fx-background-color: floralwhite;
+    -fx-font-size: 13px;
+}
+
+.button {
+    -fx-font-size: 10pt;
+    -fx-background-color: slategray;
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-font-size: 12px;
+    prefHeight: "35.0";
+    prefWidth: "289.0";
+    -fx-font-weight: bold;
+    maxWidth: "289.0";
+    minWidth: 289.0;
+    alignment: center;
+}
