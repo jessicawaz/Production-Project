@@ -64,9 +64,11 @@ public class Controller {
       Class.forName(JDBC_DRIVER);
 
       // STEP 2: Open a connection
+      // findbugs problem because there is no password
       conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
       // STEP 3: Execute a query
+      // findbugs problem
       stmt = conn.createStatement();
 
 
