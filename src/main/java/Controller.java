@@ -64,21 +64,26 @@ public class Controller {
             //STEP 3: Execute a query
             stmt = conn.createStatement();
 
+            // set values to text
             String nameTxt = txtProdName.getText();
             String manuTxt = txtManufacturer.getText();
             String typeCmb = cmbItemType.getValue();
 
-//            String sql = "SELECT * FROM product";
-//
-//            ResultSet rs = stmt.executeQuery(sql);
+            // update name, type, & manu
+            String sql = "update product set name=? , type=? , manufacturer=? ";
 
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, nameTxt);
+            preparedStatement.setString(2, typeCmb);
+            preparedStatement.setString  (3, manuTxt);
+            int row = preparedStatement.executeUpdate();
+
+            // print to console
             System.out.println(nameTxt);
             System.out.println(manuTxt);
             System.out.println(typeCmb);
-//
-//            String inSql = "INSERT INTO product (type, manufacturer, name) " +
-//                    "VALUES ( 'AUDIO', 'Apple', 'iPod' )";
-//            stmt.executeUpdate(inSql);
+
 
             // STEP 4: Clean-up environment
             stmt.close();
