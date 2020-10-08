@@ -8,10 +8,7 @@
 import java.sql.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class Controller {
 
@@ -31,18 +28,24 @@ public class Controller {
   @FXML
   void buttonRecordProd(ActionEvent event) {}
 
-  @FXML private ComboBox<String> cmbItemType;
+  @FXML
+  private ChoiceBox<String> chcBoxItemType;
+
+  @FXML private ComboBox<String> cmbQuantity;
 
   /**
    * initializes combobox values and allows for editing.
+   * initialized choicebox values.
    */
   public void initialize() {
     for (int count = 1; count <= 10; count++) {
-
-      cmbItemType.getItems().add(String.valueOf(count));
+      cmbQuantity.getItems().add(String.valueOf(count));
     }
-    cmbItemType.setEditable(true);
-    cmbItemType.getSelectionModel().selectFirst();
+    cmbQuantity.setEditable(true);
+    cmbQuantity.getSelectionModel().selectFirst();
+    for (ItemType itemType : ItemType.values()) {
+      chcBoxItemType.getItems().add(String.valueOf(itemType));
+    }
   }
 
   /**
@@ -73,13 +76,13 @@ public class Controller {
 
 
       String inSql = "INSERT INTO Product(type, manufacturer, name) "
-              + "VALUES ( 'AUDIO', 'Apple', 'iPod' )";
+              + "VALUES ( name=?, type=?, manufacturer=? )";
 
       String nameTxt = txtProdName.getText();
 
       String manuTxt = txtManufacturer.getText();
 
-      String typeCmb = cmbItemType.getValue();
+      String typeChc = chcBoxItemType.getValue();
 
       // update name, type, & manu
       String sql = "update product set name=? , type=? , manufacturer=? ";
@@ -87,14 +90,14 @@ public class Controller {
       PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
       preparedStatement.setString(1, nameTxt);
-      preparedStatement.setString(2, typeCmb);
+      preparedStatement.setString(2, typeChc);
       preparedStatement.setString(3, manuTxt);
       preparedStatement.executeUpdate();
 
       // print to console
       System.out.println(nameTxt);
       System.out.println(manuTxt);
-      System.out.println(typeCmb);
+      System.out.println(typeChc);
 
       // STEP 4: Clean-up environment
       stmt.close();
