@@ -5,13 +5,13 @@
 */
 
 .root {
-    -fx-background-color: floralwhite;
+    -fx-background-color: #daf2dc;
     -fx-font-size: 13px;
 }
 
 .button {
     -fx-font-size: 10pt;
-    -fx-background-color: slategray;
+    -fx-background-color: #ffcce7;
     -fx-font-weight: bold;
 }
 
@@ -23,4 +23,9 @@
     maxWidth: "289.0";
     minWidth: 289.0;
     alignment: center;
+    -fx-text-fill: #4d5198;
+}
+
+.tab-pane {
+    -fx-text-fill: #1e847f;
 }

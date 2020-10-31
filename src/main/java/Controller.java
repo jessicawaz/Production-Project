@@ -1,14 +1,20 @@
 /*
-* Author: Jessica Wazbinski
-* Purpose: Controller for production project. Utilizes sql and database
-* for adding and updating products.
-* Date: 9/19/2020
-*/
+ * Author: Jessica Wazbinski
+ * Purpose: Controller for production project. Utilizes sql and database
+ * for adding and updating products.
+ * Date: 9/19/2020
+ */
 
 import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Controller {
 
@@ -16,47 +22,98 @@ public class Controller {
 
   @FXML private TextField txtManufacturer;
 
-  @FXML private Button buttonAddProduct;
+  @FXML private TextArea txtAreaProdLog;
+
+  @FXML private TableView<Product> tableView;
+
+  @FXML private TableColumn<?, ?> colName;
+
+  @FXML private TableColumn<?, ?> colManu;
+
+  @FXML private TableColumn<?, ?> colType;
+
+  @FXML private ListView<String> listViewProduce;
 
   @FXML
   void buttonAddProduct(ActionEvent event) {
     connectToDb();
+    addToListView();
   }
 
-  @FXML private Label lblAdded;
-
   @FXML
-  void buttonRecordProd(ActionEvent event) {}
+  void buttonRecordProd(ActionEvent event) {
+    record();
+  }
 
-  @FXML
-  private ChoiceBox<String> chcBoxItemType;
+  @FXML private ChoiceBox<String> chcBoxItemType;
 
   @FXML private ComboBox<String> cmbQuantity;
 
+  public void itemTypeCode() {}
+
+  // list of products in product line tab
+  ObservableList<Product> productLine =
+      FXCollections.observableArrayList(
+          // new Widget(txtProdName.getText(), txtManufacturer.getText(),
+          // ItemType.valueOf(chcBoxItemType.getValue()))
+          );
+
+  /** Adds products to list view on produce tab */
+  public void addToListView() {
+    // add product to ListView in produce tab
+    listViewProduce.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    listViewProduce
+        .getItems()
+        .addAll(txtProdName.getText(), txtManufacturer.getText(), chcBoxItemType.getValue());
+  }
+
+  /** Updates table on product line tab. */
+  public void setUpProductLineTable() {
+    // add column data
+    colName.setCellValueFactory(new PropertyValueFactory("name"));
+    colManu.setCellValueFactory(new PropertyValueFactory("manufacturer"));
+    colType.setCellValueFactory(new PropertyValueFactory("type"));
+    tableView.setItems(productLine);
+  }
+
+  /** Records product to production log. */
+  public void record() {
+    // add text from ProductionRecord to product log text area
+    Product product =
+        new Product(txtProdName.getText(), txtManufacturer.getText(), ItemType.AUDIO) {};
+    ProductionRecord pr = new ProductionRecord(product, product.getId());
+    txtAreaProdLog.appendText(String.valueOf(pr));
+  }
+
   /**
-   * initializes combobox values and allows for editing.
-   * initialized choicebox values.
+   * initializes combobox values and allows for editing. initializes choicebox values. initializes
+   * product log text area
    */
   public void initialize() {
+
+    // initialize combo box, sets editable
     for (int count = 1; count <= 10; count++) {
       cmbQuantity.getItems().add(String.valueOf(count));
     }
     cmbQuantity.setEditable(true);
     cmbQuantity.getSelectionModel().selectFirst();
+
+    // initializes choice box
     for (ItemType itemType : ItemType.values()) {
       chcBoxItemType.getItems().add(String.valueOf(itemType));
     }
+    setUpProductLineTable();
   }
 
-  /**
-   * Connect to database & add SQL.
-   */
+  /** Connect to database & add SQL. */
   public void connectToDb() {
 
+    // spotbugs problem
     final String JDBC_DRIVER = "org.h2.Driver";
     final String DB_URL = "jdbc:h2:./resources/db";
 
     //  Database credentials
+    // spotbugs problem
     final String USER = "";
     final String PASS = "";
     Connection conn = null;
@@ -67,42 +124,32 @@ public class Controller {
       Class.forName(JDBC_DRIVER);
 
       // STEP 2: Open a connection
-      // findbugs problem because there is no password
+      // spotbugs problem because there is no password
       conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
       // STEP 3: Execute a query
-      // findbugs problem
+      // spotbugs problem
       stmt = conn.createStatement();
 
-
-      String inSql = "INSERT INTO Product(type, manufacturer, name) "
-              + "VALUES ( name=?, type=?, manufacturer=? )";
-
+      // get text from input
       String nameTxt = txtProdName.getText();
-
       String manuTxt = txtManufacturer.getText();
-
       String typeChc = chcBoxItemType.getValue();
 
-      // update name, type, & manu
-      String sql = "update product set name=? , type=? , manufacturer=? ";
+      // add values from input to product table
+      final String sql = "INSERT INTO PRODUCT (name, type, manufacturer)" + "VALUES (?,?,?)";
 
-      PreparedStatement preparedStatement = conn.prepareStatement(sql);
+      PreparedStatement ps = conn.prepareStatement(sql);
+      ps.setString(1, nameTxt);
+      ps.setString(2, typeChc);
+      ps.setString(3, manuTxt);
 
-      preparedStatement.setString(1, nameTxt);
-      preparedStatement.setString(2, typeChc);
-      preparedStatement.setString(3, manuTxt);
-      preparedStatement.executeUpdate();
-
-      // print to console
-      System.out.println(nameTxt);
-      System.out.println(manuTxt);
-      System.out.println(typeChc);
+      //      ps.executeUpdate();
 
       // STEP 4: Clean-up environment
       stmt.close();
       conn.close();
-      preparedStatement.close();
+      ps.close();
 
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
