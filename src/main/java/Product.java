@@ -1,10 +1,10 @@
 public abstract class Product implements Item {
 
   // fields
-  int id;
+  private int id;
   ItemType type;
-  String manufacturer;
-  String name;
+  private String manufacturer;
+  private String name;
 
   /** Product Constructor (abstract). */
   public Product(String name, String manufacturer, ItemType type) {

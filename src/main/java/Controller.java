@@ -38,6 +38,7 @@ public class Controller {
   void buttonAddProduct(ActionEvent event) {
     connectToDb();
     addToListView();
+    setUpProductLineTable();
   }
 
   @FXML
@@ -49,13 +50,10 @@ public class Controller {
 
   @FXML private ComboBox<String> cmbQuantity;
 
-  public void itemTypeCode() {}
-
   // list of products in product line tab
   ObservableList<Product> productLine =
       FXCollections.observableArrayList(
           // new Widget(txtProdName.getText(), txtManufacturer.getText(),
-          // ItemType.valueOf(chcBoxItemType.getValue()))
           );
 
   /** Adds products to list view on produce tab */
@@ -64,7 +62,12 @@ public class Controller {
     listViewProduce.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     listViewProduce
         .getItems()
-        .addAll(txtProdName.getText(), txtManufacturer.getText(), chcBoxItemType.getValue());
+        .addAll(
+            txtProdName.getText()
+                + "\n"
+                + txtManufacturer.getText()
+                + "\n"
+                + chcBoxItemType.getValue());
   }
 
   /** Updates table on product line tab. */
@@ -78,11 +81,14 @@ public class Controller {
 
   /** Records product to production log. */
   public void record() {
-    // add text from ProductionRecord to product log text area
-    Product product =
-        new Product(txtProdName.getText(), txtManufacturer.getText(), ItemType.AUDIO) {};
-    ProductionRecord pr = new ProductionRecord(product, product.getId());
-    txtAreaProdLog.appendText(String.valueOf(pr));
+    // for loop to add to product log selected amount of times
+    for (int q = 0; q <= cmbQuantity.getSelectionModel().getSelectedIndex(); q++) {
+      // add text from ProductionRecord to product log text area
+      Product product =
+          new Product(txtProdName.getText(), txtManufacturer.getText(), ItemType.AUDIO) {};
+      ProductionRecord pr = new ProductionRecord(product, product.getId());
+      txtAreaProdLog.appendText(String.valueOf(pr));
+    }
   }
 
   /**
@@ -102,7 +108,6 @@ public class Controller {
     for (ItemType itemType : ItemType.values()) {
       chcBoxItemType.getItems().add(String.valueOf(itemType));
     }
-    setUpProductLineTable();
   }
 
   /** Connect to database & add SQL. */

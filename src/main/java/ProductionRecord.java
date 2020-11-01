@@ -3,19 +3,17 @@ import java.util.Date;
 public class ProductionRecord {
 
   // fields
-  public int productionNumber;
-  public int productID;
-  public String serialNumber;
-  public Date dateProduced;
-  public Product product;
-  public int prodCount;
+  private int productionNumber = 0;
+  private int productID;
+  private String serialNumber;
+  private Date dateProduced;
 
   // use product object to access name, type, manu
 
   // spotbugs error because never used
   /** First ProductionRecord constructor. */
   public ProductionRecord(int productID) {
-    productionNumber = 0;
+    productionNumber++;
     serialNumber = "0";
     dateProduced = new Date();
     this.productID = productID;
@@ -23,8 +21,9 @@ public class ProductionRecord {
 
   // spotbugs error because never used
   /** Second ProductionRecord constructor. */
-  public ProductionRecord(int productionNumber, int productID,
-                          String serialNumber, Date dateProduced) {
+  public ProductionRecord(
+      int productionNumber, int productID, String serialNumber, Date dateProduced) {
+    productionNumber++;
     this.productionNumber = productionNumber;
     this.productID = productID;
     this.serialNumber = serialNumber;
@@ -33,8 +32,8 @@ public class ProductionRecord {
 
   /** ProductionRecord constructor used in controller for product log text area. */
   public ProductionRecord(Product product, int prodCount) {
-    productionNumber = 0;
-    productID = 0;
+    productionNumber++;
+    productID = product.getId();
     this.serialNumber = genSerialNum(product, prodCount);
     dateProduced = new Date();
   }
@@ -42,8 +41,10 @@ public class ProductionRecord {
   /** Generates a serial number for each product. */
   public String genSerialNum(Product product, int prodCount) {
     String serialNum;
-    serialNum = product.getManufacturer().substring(0, 3) + product.type.code
-            + String.format("%05d", prodCount);
+    serialNum =
+        product.getManufacturer().substring(0, 3)
+            + product.type.code
+            + String.format("%05d", productionNumber);
     return serialNum;
   }
 
