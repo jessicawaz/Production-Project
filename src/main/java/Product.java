@@ -10,7 +10,7 @@ public abstract class Product implements Item {
   public Product(String name, String manufacturer, ItemType type) {
     this.name = name;
     this.manufacturer = manufacturer;
-    this.type = type;
+    this.setType(type);
   }
 
   /** toString method used to print Product. */

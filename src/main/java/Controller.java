@@ -46,15 +46,9 @@ public class Controller {
     record();
   }
 
-  @FXML private ChoiceBox<String> chcBoxItemType;
+  @FXML private ChoiceBox<ItemType> chcBoxItemType;
 
   @FXML private ComboBox<String> cmbQuantity;
-
-  // list of products in product line tab
-  ObservableList<Product> productLine =
-      FXCollections.observableArrayList(
-          // new Widget(txtProdName.getText(), txtManufacturer.getText(),
-          );
 
   /** Adds products to list view on produce tab */
   public void addToListView() {
@@ -76,7 +70,6 @@ public class Controller {
     colName.setCellValueFactory(new PropertyValueFactory("name"));
     colManu.setCellValueFactory(new PropertyValueFactory("manufacturer"));
     colType.setCellValueFactory(new PropertyValueFactory("type"));
-    tableView.setItems(productLine);
   }
 
   /** Records product to production log. */
@@ -106,7 +99,7 @@ public class Controller {
 
     // initializes choice box
     for (ItemType itemType : ItemType.values()) {
-      chcBoxItemType.getItems().add(String.valueOf(itemType));
+      chcBoxItemType.getItems().add(itemType);
     }
   }
 
@@ -139,7 +132,16 @@ public class Controller {
       // get text from input
       String nameTxt = txtProdName.getText();
       String manuTxt = txtManufacturer.getText();
-      String typeChc = chcBoxItemType.getValue();
+      String typeChc = String.valueOf(chcBoxItemType);
+      // chcBoxItemType.getValue();
+
+      // list of products in product line tab
+      ObservableList<Product> productLine =
+          FXCollections.observableArrayList(
+              new Widget(
+                  txtProdName.getText(), txtManufacturer.getText(), chcBoxItemType.getValue()));
+
+      tableView.setItems(productLine);
 
       // add values from input to product table
       final String sql = "INSERT INTO PRODUCT (name, type, manufacturer)" + "VALUES (?,?,?)";
