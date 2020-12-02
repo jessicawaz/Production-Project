@@ -9,6 +9,8 @@ This project was initially created during the fall semester for my Object-Orient
 [JavaDoc](https://jessicawaz.github.io/Production-Project/allclasses.html)
 
 ## Diagrams
+![Class Diagram1](https://user-images.githubusercontent.com/70324104/100890187-f6275680-3485-11eb-9db2-37ae2cfd2b63.PNG)
+![Class Diagram2](https://user-images.githubusercontent.com/70324104/100890314-19ea9c80-3486-11eb-8297-969e044f79a4.PNG)
 
 ## Getting Started
 
