@@ -20,3 +20,16 @@ Resources: <br />
 * [W3Schools Regex](https://www.w3schools.com/java/java_regex.asp)
 * [TimeStamp](https://tecadmin.net/get-current-timestamp-in-java/)
 * [TutorialsPoint](https://www.tutorialspoint.com/java/java_string_split.htm)
+
+## Contributing
+
+## Author
+Jessica Wazbinski
+
+## License
+
+## Acknowledgments
+* [W3Schools Regex](https://www.w3schools.com/java/java_regex.asp)
+* [TimeStamp](https://tecadmin.net/get-current-timestamp-in-java/)
+* [TutorialsPoint](https://www.tutorialspoint.com/java/java_string_split.htm)
+* Professor Vanselow
