@@ -127,7 +127,8 @@ public class Controller {
 
       // STEP 2: Open a connection
       final String USER = "";
-      conn = DriverManager.getConnection(DB_URL, USER, reverseString(txtPass.getText()));
+      final String PASS = "";
+      conn = DriverManager.getConnection(DB_URL, USER, PASS);
     } catch (ClassNotFoundException | SQLException exception) {
       exception.printStackTrace();
     }
@@ -187,6 +188,7 @@ public class Controller {
         String typeCode = resultSet.getString(3);
         String manu = resultSet.getString(4);
 
+        // get ItemType code from user selection
         switch (typeCode) {
           case "AUDIO":
             item = ItemType.AUDIO;
@@ -201,6 +203,7 @@ public class Controller {
             item = ItemType.VISUAL_MOBILE;
         }
 
+        // create new Widget(product) from input
         Widget w = new Widget(name, manu, item);
 
         // add to ObservableList from new Product
@@ -241,9 +244,7 @@ public class Controller {
    * @param productionRun ArrayList of Production Record objects.
    */
   public void showProduction(ArrayList<ProductionRecord> productionRun) {
-    for (ProductionRecord productionRecord : productionRun) {
-      txtAreaProdLog.appendText(productionRecord.toString());
-    }
+    txtAreaProdLog.appendText(productionRun.toString());
   }
 
   /**
@@ -258,8 +259,7 @@ public class Controller {
     ProductionRecord pr = new ProductionRecord(productFromEntry, prodCount);
     Timestamp ts = new Timestamp(pr.getProdDate().getTime());
     String sql =
-        "INSERT INTO PRODUCTIONRECORD (PRO"
-            + "DUCTION_NUM,PRODUCT_ID,SERIAL_NUM,DATE_PRODUCED)"
+        "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM,PRODUCT_ID,SERIAL_NUM,DATE_PRODUCED)"
             + " VALUES (?,?,?,?)";
     try {
       PreparedStatement ps = conn.prepareStatement(sql);
@@ -279,7 +279,6 @@ public class Controller {
     if (id.isEmpty()) {
       return id;
     }
-
     return reverseString(id.substring(1)) + id.charAt(0);
   }
 }
