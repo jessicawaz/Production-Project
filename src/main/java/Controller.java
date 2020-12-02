@@ -72,6 +72,7 @@ public class Controller {
 
       // update table
       ps.executeUpdate();
+      ps.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -94,6 +95,7 @@ public class Controller {
     String name = empName.getText();
     String pass = txtPass.getText();
     Employee e = new Employee(name, pass);
+    // check if password is valid
     if (e.isValidPassword(pass)) {
       lblValid.setText("Valid Password. Continue");
     } else {
@@ -106,6 +108,7 @@ public class Controller {
     String name = empName.getText();
     String pass = txtPass.getText();
     Employee e = new Employee(name, pass);
+    // finds employee credentials
     credentials.setText(e.toString());
   }
 
@@ -124,8 +127,7 @@ public class Controller {
 
       // STEP 2: Open a connection
       final String USER = "";
-      final String PASS = "";
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      conn = DriverManager.getConnection(DB_URL, USER, reverseString(txtPass.getText()));
     } catch (ClassNotFoundException | SQLException exception) {
       exception.printStackTrace();
     }
@@ -148,6 +150,7 @@ public class Controller {
       chcBoxItemType.getItems().add(String.valueOf(itemType));
     }
 
+    // shows password requirements
     lblInvalid.setText(
         "Password must contain:"
             + "\nA lowercase letter \nAn uppercase letter \nA special character");
@@ -266,8 +269,17 @@ public class Controller {
       ps.setTimestamp(4, ts);
       ps.executeUpdate();
 
+      ps.close();
     } catch (SQLException exception) {
       exception.printStackTrace();
     }
+  }
+
+  public String reverseString(String id) {
+    if (id.isEmpty()) {
+      return id;
+    }
+
+    return reverseString(id.substring(1)) + id.charAt(0);
   }
 }

@@ -64,7 +64,6 @@ public class ProductionRecord {
         product.getManufacturer().substring(0, 3)
             + product.type.code
             + String.format("%05d", prodCount);
-    prodCount++;
     return serialNum;
   }
 
