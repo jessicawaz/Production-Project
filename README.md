@@ -6,4 +6,13 @@ This project was initially created during the fall semester for my Object-Orient
 ![Production Demo](final.gif)
 
 ## Documentation
+[JavaDoc](https://jessicawaz.github.io/Production-Project/allclasses.html)
 
+## Diagrams
+
+## Getting Started
+
+## Built With
+IDE: IntelliJ IDEA 2020
+Resources: <br />
+* Bullet list
