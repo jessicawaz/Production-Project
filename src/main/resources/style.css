@@ -24,6 +24,7 @@
     minWidth: 289.0;
     alignment: center;
     -fx-text-fill: #4d5198;
+    -fx-text-alignment: center;
 }
 
 .tab-pane {

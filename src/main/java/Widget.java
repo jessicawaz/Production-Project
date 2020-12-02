@@ -1,8 +1,15 @@
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Widget extends Product {
 
-  // constructor
+  /**
+   * Widget constructor calls Product class super.
+   *
+   * @param name Product name
+   * @param manufacturer Product manufacturer
+   * @param type Product type
+   */
   public Widget(String name, String manufacturer, ItemType type) {
     super(name, manufacturer, type);
   }

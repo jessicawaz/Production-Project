@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,8 +19,31 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TabPane prefHeight="386.0" prefWidth="600.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<TabPane prefHeight="429.0" prefWidth="602.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <tabs>
+      <Tab text="Employee">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="393.0" prefWidth="611.0">
+               <children>
+                  <TextField fx:id="empName" layoutX="28.0" layoutY="82.0" />
+                  <TextField fx:id="txtPass" layoutX="279.0" layoutY="156.0" prefHeight="29.0" prefWidth="140.0" />
+                  <Button fx:id="buttonLogin" layoutX="320.0" layoutY="228.0" mnemonicParsing="false" onAction="#buttonLogin" text="Log In" />
+                  <Button fx:id="signUp" layoutX="75.0" layoutY="118.0" mnemonicParsing="false" onAction="#signUp" prefHeight="14.0" prefWidth="67.0" text="Sign Up" />
+                  <Label layoutX="28.0" layoutY="64.0" text="Enter Name to View Credentials:" />
+                  <Label layoutX="280.0" layoutY="139.0" text="Enter Password:" />
+                  <Label layoutX="14.0" layoutY="204.0" text="New Credentials:" />
+                  <TextArea fx:id="credentials" layoutX="14.0" layoutY="229.0" prefHeight="129.0" prefWidth="236.0" />
+                  <Label id="lblValid" fx:id="lblValid" alignment="CENTER" layoutX="279.0" layoutY="192.0" prefHeight="24.0" prefWidth="169.0" stylesheets="@style.css" />
+                  <Label fx:id="lblInvalid" layoutX="419.0" layoutY="243.0" prefHeight="130.0" prefWidth="164.0" />
+                  <Label layoutX="111.0" layoutY="21.0" text="New Users:" />
+                  <Label layoutX="386.0" layoutY="21.0" text="Returning Users:" />
+                  <Separator layoutX="257.0" orientation="VERTICAL" prefHeight="395.0" prefWidth="25.0" />
+                  <Label layoutX="281.0" layoutY="64.0" text="Enter Username:" />
+                  <TextField layoutX="282.0" layoutY="82.0" prefHeight="29.0" prefWidth="133.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
         <Tab text="Product Line">
             <content>
                 <AnchorPane prefHeight="348.0" prefWidth="670.0">
@@ -39,42 +63,42 @@
                                     <GridPane.margin>
                                         <Insets />
                                     </GridPane.margin>
-                           <effect>
-                              <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                           </effect>
+                                    <effect>
+                                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                                    </effect>
                                 </Label>
                                 <TextField fx:id="txtProdName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
                                 <Label alignment="CENTER" layoutX="110.0" layoutY="35.0" prefHeight="27.0" text="Manufacturer  " GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                     <GridPane.margin>
                                         <Insets />
                                     </GridPane.margin>
-                           <effect>
-                              <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                           </effect>
+                                    <effect>
+                                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                                    </effect>
                                 </Label>
                                 <TextField fx:id="txtManufacturer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="136.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                 <Label alignment="CENTER" layoutX="160.0" layoutY="119.0" prefHeight="27.0" text="Item Type" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                     <GridPane.margin>
                                         <Insets />
                                     </GridPane.margin>
-                           <effect>
-                              <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                           </effect>
+                                    <effect>
+                                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                                    </effect>
                                 </Label>
-                        <ChoiceBox fx:id="chcBoxItemType" prefHeight="25.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                <ChoiceBox fx:id="chcBoxItemType" prefHeight="25.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                             </children>
                         </GridPane>
                         <Button fx:id="buttonAddProduct" layoutX="121.0" layoutY="267.0" mnemonicParsing="false" onAction="#buttonAddProduct" text="Add Product" textAlignment="CENTER" textFill="WHITE" />
                         <Label layoutX="377.0" layoutY="23.0" text="Existing Products">
-                     <effect>
-                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                     </effect></Label>
+                            <effect>
+                                <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                            </effect></Label>
                         <TableView fx:id="tableView" layoutX="271.0" layoutY="41.0" prefHeight="301.0" prefWidth="309.0">
-                     <columns>
-                        <TableColumn fx:id="colName" prefWidth="104.66668701171875" text="Name" />
-                        <TableColumn fx:id="colManu" prefWidth="102.66668701171875" text="Manufacturer" />
-                        <TableColumn fx:id="colType" prefWidth="99.33336385091144" text="Type" />
-                     </columns></TableView>
+                            <columns>
+                                <TableColumn fx:id="colName" prefWidth="104.66668701171875" text="Name" />
+                                <TableColumn fx:id="colManu" prefWidth="102.66668701171875" text="Manufacturer" />
+                                <TableColumn fx:id="colType" prefWidth="99.33336385091144" text="Type" />
+                            </columns></TableView>
                     </children>
                 </AnchorPane>
             </content>
@@ -84,15 +108,15 @@
                 <AnchorPane prefHeight="442.0" prefWidth="441.0">
                     <children>
                         <Label alignment="CENTER" layoutX="110.0" layoutY="43.0" prefHeight="17.0" prefWidth="93.0" text="Choose Product">
-                     <effect>
-                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                     </effect></Label>
+                            <effect>
+                                <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                            </effect></Label>
                         <ListView fx:id="listViewProduce" layoutX="15.0" layoutY="61.0" prefHeight="284.0" prefWidth="293.0" />
                         <Label alignment="CENTER" layoutX="389.0" layoutY="132.0" prefHeight="17.0" prefWidth="106.0" text="Choose Quantity">
-                     <effect>
-                        <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
-                     </effect></Label>
-                          <ComboBox fx:id="cmbQuantity" layoutX="370.0" layoutY="171.0" prefHeight="29.0" prefWidth="143.0" />
+                            <effect>
+                                <DropShadow color="#ffcce7" height="10.0" radius="4.5" width="10.0" />
+                            </effect></Label>
+                        <ComboBox fx:id="cmbQuantity" layoutX="370.0" layoutY="171.0" prefHeight="29.0" prefWidth="143.0" />
                         <Button fx:id="buttonRecordProd" layoutX="374.0" layoutY="230.0" mnemonicParsing="false" onAction="#buttonRecordProd" text="Record Production" textFill="WHITE" />
                     </children>
                 </AnchorPane>
