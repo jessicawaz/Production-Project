@@ -28,6 +28,7 @@ Contribute by making suggestions about the look of the GUI or if there is more e
 Jessica Wazbinski
 
 ## License
+![License}(https://github.com/jessicawaz/Production-Project/blob/master/LICENSE)
 
 ## Acknowledgments
 * [W3Schools Regex](https://www.w3schools.com/java/java_regex.asp)
