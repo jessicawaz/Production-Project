@@ -182,11 +182,9 @@ public class Controller {
             item = ItemType.AUDIO_MOBILE;
             break;
         }
-        }
 
         // create new Widget(product) from input
         Widget w = new Widget(name, manu, item);
-
         // add to ObservableList from new Product
         productObservableList.add(w);
       }
