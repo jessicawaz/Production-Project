@@ -15,7 +15,7 @@ This project was initially created during the fall semester for my Object-Orient
 ## Getting Started
 
 ## Built With
-IDE: IntelliJ IDEA 2020
+IDE: IntelliJ IDEA 2020 <br />
 Resources: <br />
 * [W3Schools Regex](https://www.w3schools.com/java/java_regex.asp)
 * [TimeStamp](https://tecadmin.net/get-current-timestamp-in-java/)
