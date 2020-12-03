@@ -163,7 +163,7 @@ public class Controller {
       stmt = conn.createStatement();
       ResultSet resultSet = stmt.executeQuery(sql);
 
-      ItemType item;
+      ItemType item = ItemType.AUDIO;
 
       while (resultSet.next()) {
         String name = resultSet.getString(2);
@@ -172,17 +172,16 @@ public class Controller {
 
         // get ItemType code from user selection
         switch (typeCode) {
-          case "AUDIO":
-            item = ItemType.AUDIO;
-            break;
           case "VISUAL":
             item = ItemType.VISUAL;
+            break;
+          case "VISUAL_MOBILE":
+            item = ItemType.VISUAL_MOBILE;
             break;
           case "AUDIO_MOBILE":
             item = ItemType.AUDIO_MOBILE;
             break;
-          default:
-            item = ItemType.VISUAL_MOBILE;
+        }
         }
 
         // create new Widget(product) from input
