@@ -116,24 +116,6 @@ public class Controller {
 
   @FXML private ComboBox<String> cmbQuantity;
 
-  @FXML
-  void connectToDB() {
-    try {
-      final String JDBC_DRIVER = "org.h2.Driver";
-      final String DB_URL = "jdbc:h2:./resources/db";
-
-      // STEP 1: Register JDBC driver
-      Class.forName(JDBC_DRIVER);
-
-      // STEP 2: Open a connection
-      final String USER = "";
-      final String PASS = "";
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-    } catch (ClassNotFoundException | SQLException exception) {
-      exception.printStackTrace();
-    }
-  }
-
   /**
    * Initializer method that initializes the ComboBox and the ChoiceBox. Defines the ObservableList.
    * Calls methods to set up product line table and production log.
@@ -258,6 +240,7 @@ public class Controller {
     Product productFromEntry = listViewProduce.getSelectionModel().getSelectedItem();
     ProductionRecord pr = new ProductionRecord(productFromEntry, prodCount);
     Timestamp ts = new Timestamp(pr.getProdDate().getTime());
+    for (int i = 0; i < prodCount; i++) {
     String sql =
         "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM,PRODUCT_ID,SERIAL_NUM,DATE_PRODUCED)"
             + " VALUES (?,?,?,?)";
@@ -273,6 +256,7 @@ public class Controller {
     } catch (SQLException exception) {
       exception.printStackTrace();
     }
+   }
   }
 
   public String reverseString(String id) {
@@ -280,5 +264,23 @@ public class Controller {
       return id;
     }
     return reverseString(id.substring(1)) + id.charAt(0);
+  }
+  
+  @FXML
+  void connectToDB() {
+    try {
+      final String JDBC_DRIVER = "org.h2.Driver";
+      final String DB_URL = "jdbc:h2:./resources/db";
+
+      // STEP 1: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      // STEP 2: Open a connection
+      final String USER = "";
+      final String PASS = "";
+      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+    } catch (ClassNotFoundException | SQLException exception) {
+      exception.printStackTrace();
+    }
   }
 }
