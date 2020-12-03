@@ -22,6 +22,7 @@ Resources: <br />
 * [TutorialsPoint](https://www.tutorialspoint.com/java/java_string_split.htm)
 
 ## Contributing
+Contribute by making suggestions about the look of the GUI or if there is more efficient ways to do things in the code. 
 
 ## Author
 Jessica Wazbinski
@@ -33,3 +34,13 @@ Jessica Wazbinski
 * [TimeStamp](https://tecadmin.net/get-current-timestamp-in-java/)
 * [TutorialsPoint](https://www.tutorialspoint.com/java/java_string_split.htm)
 * Professor Vanselow
+* Vladimir Hardy
+* Sean Lamont
+
+## History
+Over the course of the semester, quite a bit has been added to the project as we learned more things. The Controller was updated the most throughout the semester because that is where the bulk of the code is. 
+
+## Key Programming Concepts Utilized
+* Interfaces: Described as an "is-a" relationship. Used to inherit from the parent class of an Object that "is-a" Object of another. 
+* Abstract classes: In an abstract class, Objects cannot be created. It has at least one abstract method that the children classes build off of.
+* Enums: Essentially variables with pre-determined values. 
