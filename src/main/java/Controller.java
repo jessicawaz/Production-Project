@@ -59,11 +59,13 @@ public class Controller {
   @FXML
   void buttonAddProduct(ActionEvent event) {
     try {
-      // add Product into DB
+      // get text from input, used for insert into DB below
       String nameTxt = txtProdName.getText();
       String manuTxt = txtManufacturer.getText();
       String typeChc = chcBoxItemType.getValue();
 
+      // SQL to insert name, type, & manu columns into product table with 
+      // values from input
       String sql = "INSERT INTO PRODUCT (name, type, manufacturer)" + "VALUES (?,?,?)";
       PreparedStatement ps = conn.prepareStatement(sql);
       ps.setString(1, nameTxt);
@@ -72,6 +74,7 @@ public class Controller {
 
       // update table
       ps.executeUpdate();
+      // clean-up environment
       ps.close();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -94,6 +97,7 @@ public class Controller {
   void buttonLogin(ActionEvent event) {
     String name = empName.getText();
     String pass = txtPass.getText();
+    // create new Employee object from input to get password
     Employee e = new Employee(name, pass);
     // check if password is valid
     if (e.isValidPassword(pass)) {
@@ -107,6 +111,7 @@ public class Controller {
   void signUp(ActionEvent event) {
     String name = empName.getText();
     String pass = txtPass.getText();
+    // Create new Employee object to create credentials from input
     Employee e = new Employee(name, pass);
     // finds employee credentials
     credentials.setText(e.toString());
@@ -159,6 +164,7 @@ public class Controller {
   /** This method gets products from product database and adds them to observable list. */
   public void loadProductList() {
     try {
+      // SQL statement to choose all from product table
       String sql = "SELECT * FROM PRODUCT";
       stmt = conn.createStatement();
       ResultSet resultSet = stmt.executeQuery(sql);
@@ -200,6 +206,7 @@ public class Controller {
    */
   public void loadProductionLog(ArrayList<ProductionRecord> productionRun) {
     try {
+      // SQL statement to select all from productionrecord table
       String sql = "SELECT * FROM PRODUCTIONRECORD";
       PreparedStatement rps = conn.prepareStatement(sql);
       ResultSet resultSet = rps.executeQuery();
@@ -208,7 +215,9 @@ public class Controller {
         int prodID = resultSet.getInt(2);
         String serial = resultSet.getString(3);
         Date prodDate = resultSet.getDate(4);
+        // create new productionRecord obj with data from table
         ProductionRecord productionRecord = new ProductionRecord(prodNum, prodID, serial, prodDate);
+        // add ^ data to the arrayList
         productionRun.add(productionRecord);
       }
       showProduction(productionRun);
@@ -238,6 +247,7 @@ public class Controller {
     ProductionRecord pr = new ProductionRecord(productFromEntry, prodCount);
     Timestamp ts = new Timestamp(pr.getProdDate().getTime());
     for (int i = 0; i < prodCount; i++) {
+    // SQL statement to insert data from selection into ProductionRecord table
     String sql =
         "INSERT INTO PRODUCTIONRECORD (PRODUCTION_NUM,PRODUCT_ID,SERIAL_NUM,DATE_PRODUCED)"
             + " VALUES (?,?,?,?)";
@@ -248,7 +258,8 @@ public class Controller {
       ps.setString(3, pr.getSerialNum());
       ps.setTimestamp(4, ts);
       ps.executeUpdate();
-
+      
+      // clean up environment
       ps.close();
     } catch (SQLException exception) {
       exception.printStackTrace();
